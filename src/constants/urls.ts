@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'http://3.83.98.142:3000'
+export const BACKEND_URL = 'https://uchain.duckdns.org/api'
