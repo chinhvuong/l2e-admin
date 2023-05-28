@@ -143,7 +143,7 @@ const ApproveRequest = ({ data, reload }: Props) => {
                 height={150}
             />
             <div className='flex flex-col grow'>
-                <h3 className='text-md font-medium'><Link target={'_blank'} href={CLIENT_DOMAIN + `course/${data.course._id}`}>{data.course?.name}</Link></h3>
+                <h3 className='text-md font-medium'><Link href={`courses/${data.course._id}`}>{data.course?.name}</Link></h3>
                 <span className='opacity-60'>{
                     moment(data.createdAt).fromNow()
                 }</span>

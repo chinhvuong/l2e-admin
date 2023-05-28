@@ -13,3 +13,19 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.course-detail-thumbnail {
+  position: relative;
+}
+
+.course-detail-thumbnail:before {
+  content: ' ';
+  display: 'block';
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}

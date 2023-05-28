@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ACCESS_TOKEN_KEY } from '@/constants'
+import { Router } from 'next/router'
 
 async function sendRequest(
     payload: AxiosRequestConfig,
@@ -32,6 +33,10 @@ axiosInstance.interceptors.response.use(
     },
     async (err: AxiosError) => {
         const { response } = err
+        if (response?.status === 404) {
+
+        }
+        throw err
         try {
             return response
         } catch (error) {
@@ -60,7 +65,11 @@ export default sendRequest
 
 export const wrap = async (fn: () => Promise<any>) => {
     try {
-        return await fn()
+        const rs = await fn()
+        if (rs.statusCode === 404) {
+
+        }
+        return rs
     } catch (error) {
         console.log("🚀 ~ file: index.ts:64 ~ wrap ~ error", error)
 

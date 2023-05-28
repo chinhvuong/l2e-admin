@@ -16,34 +16,24 @@ import Image from 'next/image';
 import CustomPagination from '../pagination';
 import { courses } from '@/services/course.service';
 import Search from '../search';
+import Link from 'next/link';
 
 function Row(props: { row: any }) {
     const { row } = props;
-    const [open, setOpen] = React.useState(false);
+    // const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell>
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
+            <TableRow component={Link} href={'courses/' + row._id} sx={{ '& > *': { borderBottom: 'unset' } }}>
+
                 <TableCell component="th" scope="row">
                     {row._id}
                 </TableCell>
-                {/* <TableCell component="th" scope="row">
-                    {row.name}
-                </TableCell> */}
                 <TableCell>{row.courseId}</TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.students}</TableCell>
                 <TableCell>{row.rating}</TableCell>
-                <TableCell>${row.price}</TableCell>
+                <TableCell>{row.price} USDT</TableCell>
                 <TableCell>{row.approved ? (
                     <div className='bg-blue-200 py-2 px-4 rounded-lg text-center'>
                         Approved
@@ -54,32 +44,6 @@ function Row(props: { row: any }) {
                     </div>
                 )}</TableCell>
                 <TableCell>{moment(row.createdAt).fromNow()}</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <div className='py-6'>
-                            <div className="flex gap-6">
-                                <Image
-                                    src={row.thumbnail || '/course-default.png'}
-                                    alt={'course thumbnail'}
-                                    width={100}
-                                    height={100}
-                                />
-                                <div>
-                                    <h3 className="font-semibold">{row.name || 'No name'}</h3>
-                                    <div><span className="font-bold">Author: </span>{row.author}</div>
-                                    <div><span className="font-bold">Owner: </span>{row.owner}</div>
-                                    <div> <span className="font-bold">Students:</span>{row.students || 0}</div>
-                                    <div><span className="font-bold">Rating: </span>{row.rating || 0}</div>
-                                </div>
-                            </div>
-                            <div className="py-4">
-                                Overview: {row.overview || 'blank'}
-                            </div>
-                        </div>
-                    </Collapse>
-                </TableCell>
             </TableRow>
         </React.Fragment>
     );
@@ -187,7 +151,7 @@ export default function CourseList() {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow className='font-bold'>
-                            <TableCell />
+                            {/* <TableCell /> */}
                             <TableCell className='!font-bold'>Id</TableCell>
                             {/* <TableCell className='!font-bold'>Name</TableCell> */}
                             <TableCell className='!font-bold'>CourseId</TableCell>
